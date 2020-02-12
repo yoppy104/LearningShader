@@ -63,6 +63,10 @@
                 fixed4 col = tex2D(_MainTex, uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
+
+				//透明度が0.9以下でカリングする
+				clip(col.a - 0.9);
+
                 return col;
             }
             ENDCG
