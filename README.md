@@ -15,4 +15,9 @@ READMEには学習した備忘録を記載<br>
     移動方向、移動速度、移動幅を設定可能。<br>
     [[ SelectCommandIcon.shader ]]
   </li>
+  <li>
+     網掛け表示にして半透明にするシェーダー<br>
+     vertexと表示レートとの剰余を計算して、x軸とy軸の値が等しい部分だけを表示するようにした。
+     [[ Hatching.shader ]]
+   </li>
 </ul>
