@@ -1,16 +1,12 @@
-﻿/***************************************
-<summary>	テクスチャを特定の方向に揺らして表示する
-****************************************/
+﻿/********************************************
+<summary> RGBでもっとも強い数値を持つものの単色として表現する
+*********************************************/
 
-Shader "Unlit/SelectCommandIcon"
+Shader "Unlit/NearestSingleColor"
 {
     Properties
     {
-        _MainTex   ("Texture", 2D) = "white" {}
-		_Speed     ("Speed", float) = 1
-		_Range	   ("Range", float) = 0.5
-		_MoveRateX ("MoveRateX", float) = 0.5
-		_MoveRateY ("MoveRateY", float) = 0.5
+        _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
@@ -42,10 +38,6 @@ Shader "Unlit/SelectCommandIcon"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-			float _Speed;		//移動速度
-			float _Range;		//移動幅
-			float _MoveRateX;	//左右方向への移動量
-			float _MoveRateY;	//上下方向への移動量
 
             v2f vert (appdata v)
             {
@@ -56,21 +48,12 @@ Shader "Unlit/SelectCommandIcon"
                 return o;
             }
 
-			fixed4 frag(v2f i) : SV_Target
-			{
-				//描画UVの計算
-				float2 uv = i.uv;
-				uv.x += _MoveRateX * _Range * sin(_Time.y * _Speed);
-				uv.y += _MoveRateY * _Range * sin(_Time.y * _Speed);
-
+            fixed4 frag (v2f i) : SV_Target
+            {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, uv);
+                fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-
-				//透明度が0.9以下でカリングする
-				clip(col.a - 0.9);
-
                 return col;
             }
             ENDCG

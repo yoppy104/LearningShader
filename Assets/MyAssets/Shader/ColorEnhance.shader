@@ -1,4 +1,8 @@
-﻿Shader "Unlit/ColorEnhance"
+﻿/*******************************************
+<summary> 引数で追加されたパラメータ通りにRGBを強調する
+********************************************/
+
+Shader "Unlit/ColorEnhance"
 {
     Properties
     {

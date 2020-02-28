@@ -1,4 +1,8 @@
-﻿Shader "Unlit/Hatching"
+﻿/***************************************
+<summary> 網掛けで表示する
+****************************************/
+
+Shader "Unlit/Hatching"
 {
     Properties
     {
