@@ -39,6 +39,21 @@ Shader "Unlit/NearestSingleColor"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
+			fixed4 Singlize(fixed4 col) {
+				fixed4 o = fixed4(0, 0, 0, 1);
+				if (col.r >= col.g && col.r >= col.b) {
+					o.r = 1;
+				}
+				if (col.g >= col.r && col.g >= col.b) {
+					o.g = 1;
+				}
+				if (col.b >= col.r && col.b >= col.g) {
+					o.b = 1;
+				}
+
+				return o;
+			}
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -54,7 +69,12 @@ Shader "Unlit/NearestSingleColor"
                 fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+
+				fixed4 single_col = Singlize(col);
+
+				clip(single_col.a - 0.9);
+
+                return single_col;
             }
             ENDCG
         }
