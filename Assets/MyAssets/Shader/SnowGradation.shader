@@ -1,4 +1,8 @@
-﻿Shader "Unlit/SnowGradation"
+﻿/**********************************************
+<summary> テクスチャブレンドシェーダ
+***********************************************/
+
+Shader "Unlit/SnowGradation"
 {
     Properties
     {
